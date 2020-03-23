@@ -27,6 +27,9 @@ food.color("red")
 food.penup()
 food.goto(0,100)
 
+# Cuerpo serpiente
+body = []
+
 # Funciones
 def up():
     head.direction = "up"
@@ -67,6 +70,24 @@ while True:
         x = random.randint(-280,280)
         y = random.randint(-280,280)
         food.goto(x,y)
+
+        segment_body = turtle.Turtle()
+        segment_body.speed(0)
+        segment_body.shape("square")
+        segment_body.color("grey")
+        segment_body.penup()
+
+        body.append(segment_body)
+    
+    total_seg = len(body)
+    for i in range(total_seg - 1, 0, -1):
+        x =  body[i-1].xcor()
+        y =  body[i-1].ycor()
+        body[i].goto(x,y)
+    
+    if total_seg > 0:
+        body[0].goto(head.xcor(), head.ycor())
+
     mov()
     time.sleep(posponer)
 
