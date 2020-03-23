@@ -30,6 +30,20 @@ food.goto(0,100)
 # Cuerpo serpiente
 body = []
 
+# Puntos
+score = 0
+high_score = 0
+
+#Labels
+text = turtle.Turtle()
+text.speed(0)
+text.color("white")
+text.penup()
+text.hideturtle()
+text.goto(-280,270)
+text.write(f"Score: {score}            High Score: {high_score}", font=("Courier", 20, "normal"))
+
+
 # Funciones
 def up():
     head.direction = "up"
@@ -42,6 +56,10 @@ def right():
 
 def left():
     head.direction = "left"
+
+def paint_text():
+    text.clear()
+    text.write(f"Score: {score}            High Score: {high_score}", font=("Courier", 20, "normal"))
 
 def mov():
     if head.direction == "up":
@@ -74,6 +92,10 @@ while True:
         head.direction = "stop"
         for i in body: i.goto(1000,1000)
         body.clear()
+        if score > high_score:
+            high_score = score
+        score = 0
+        paint_text()
     
     # Comer Fruta
     if head.distance(food) < 20:
@@ -89,6 +111,8 @@ while True:
         segment_body.penup()
 
         body.append(segment_body)
+        score += 1
+        paint_text()
     
     total_seg = len(body)
     for i in range(total_seg - 1, 0, -1):
