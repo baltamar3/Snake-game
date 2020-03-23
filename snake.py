@@ -2,7 +2,7 @@ import turtle
 import time
 import random
 
-posponer = 0.2
+posponer = 0.15
 
 # Escenario del juego
 window = turtle.Screen()
@@ -66,10 +66,21 @@ window.onkeypress(left, "Left")
 
 while True:
     window.update()
+
+    # Colisiones bordes
+    if head.xcor() == 280  or head.ycor() == 280 or head.xcor() == -280 or head.ycor() == -280:
+        time.sleep(1)
+        head.goto(0,0)
+        head.direction = "stop"
+        for i in body: i.goto(1000,1000)
+        body.clear()
+    
+    # Comer Fruta
     if head.distance(food) < 20:
         x = random.randint(-280,280)
         y = random.randint(-280,280)
         food.goto(x,y)
+
 
         segment_body = turtle.Turtle()
         segment_body.speed(0)
