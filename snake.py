@@ -1,5 +1,6 @@
 import turtle
 import time
+import random
 
 posponer = 0.2
 
@@ -17,6 +18,14 @@ head.color("green")
 head.penup()
 head.goto(0,0)
 head.direction = "stop"
+
+# Comida
+food = turtle.Turtle()
+food.speed(0)
+food.shape("circle")
+food.color("red")
+food.penup()
+food.goto(0,100)
 
 # Funciones
 def up():
@@ -45,7 +54,7 @@ def mov():
         x = head.xcor()
         head.setx(x - 20)
 
-# Events KeyBoard
+# Eventos de teclado
 window.listen()
 window.onkeypress(up, "Up")
 window.onkeypress(down, "Down")
@@ -54,6 +63,10 @@ window.onkeypress(left, "Left")
 
 while True:
     window.update()
+    if head.distance(food) < 20:
+        x = random.randint(-280,280)
+        y = random.randint(-280,280)
+        food.goto(x,y)
     mov()
     time.sleep(posponer)
 
