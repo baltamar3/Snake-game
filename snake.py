@@ -16,9 +16,21 @@ head.shape("square")
 head.color("green")
 head.penup()
 head.goto(0,0)
-head.direction = "down"
+head.direction = "stop"
 
 # Funciones
+def up():
+    head.direction = "up"
+
+def down():
+    head.direction = "down"
+
+def right():
+    head.direction = "right"
+
+def left():
+    head.direction = "left"
+
 def mov():
     if head.direction == "up":
         y = head.ycor()
@@ -32,6 +44,13 @@ def mov():
     if head.direction == "left":
         x = head.xcor()
         head.setx(x - 20)
+
+# Events KeyBoard
+window.listen()
+window.onkeypress(up, "Up")
+window.onkeypress(down, "Down")
+window.onkeypress(right, "Right")
+window.onkeypress(left, "Left")
 
 while True:
     window.update()
